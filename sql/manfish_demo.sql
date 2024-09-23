@@ -1,10 +1,10 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : 个人阿里云-manfish
+ Source Server         : manfish
  Source Server Type    : MySQL
  Source Server Version : 80035
- Source Host           : 120.26.193.79:3306
+ Source Host           : 127.0.0.1:3306
  Source Schema         : manfish_demo
 
  Target Server Type    : MySQL
