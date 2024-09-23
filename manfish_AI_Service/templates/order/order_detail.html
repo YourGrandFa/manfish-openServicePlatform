@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>订单详情</title>
+    <link rel="stylesheet" href="/static/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/detail1.css">
+    <link rel="stylesheet" href="/static/css/back_page.css">
+</head>
+<body>
+<!-- 返回链接，使用图片作为图标 -->
+    <a href="javascript:history.back()" class="back-link">
+        <img src="/static/image/back.png" alt="返回" />
+    </a>
+    <div class="container">
+        <h1>订单详情</h1>
+
+        <!-- 订单基本信息 -->
+        <div class="order-info">
+            <h2>订单内容</h2>
+            <p><strong>服务名称:</strong> {{ order_msg.service_name }}</p>
+            <p><strong>申请时间:</strong> {{ order_msg.apply_time }}</p>
+            <p><strong>服务商:</strong> {{ order_msg.performer }}</p>
+            <p><strong>订单金额:</strong> {{ order_msg.spend_money }}</p>
+            <p><strong>结束时间:</strong> {{ order_msg.finish_time }}</p>
+            <p><strong>当前状态:</strong> {{ order_msg.state }}</p>
+            <p><strong>文字要求:</strong> {{ order_msg.desc_text }}</p>
+            <!-- 附件列表 -->
+            <div class="attachments">
+                <h2>要求附件</h2>
+                {% if order_msg.file_names %}
+                    <ul>
+                        {% for appendix in order_msg.file_names %}
+                            <li>
+                                <a href="/file/download?file_id={{ appendix.file_id }}" download="{{ appendix.file_name }}">
+                                    <i class="fas fa-file-download"></i> {{ appendix.file_name }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="no-attachments">没有附件可供下载。</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- 订单进度信息 -->
+        <div class="order-info">
+            {% for process in processes %}
+                <h2>进度详情</h2>
+                <p><strong>结束时间:</strong> {{ process.process_time }}</p>
+                <p><strong>进程状态:</strong> {{ process.state }}</p>
+                <p><strong>文字结果:</strong> {{ process.res_text }}</p>
+
+                <!-- 附件列表 -->
+                <div class="attachments">
+                <h2>反馈文件</h2>
+                {% if process.file_names %}
+                    <ul>
+                        {% for appendix in process.file_names %}
+                            <li>
+                                <a href="/file/download?file_id={{ appendix.file_id }}" download="{{ appendix.file_name }}">
+                                    <i class="fas fa-file-download"></i> {{ appendix.file_name }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="no-attachments">没有附件可供下载。</p>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>服务订阅页面</title>
+    <link rel="stylesheet" href="/static/css/list_css.css">
+    <link rel="stylesheet" href="/static/css/back_page.css">
+</head>
+<body>
+<!-- 返回链接，使用图片作为图标 -->
+    <a href="javascript:history.back()" class="back-link">
+        <img src="/static/image/back.png" alt="返回" />
+    </a>
+    <header>
+        <div class="container">
+            <div class="user-info">
+                <span id="username">用户名: {{ user.username }}</span>
+                <span id="balance">账户余额: ¥ <span style="color: goldenrod;font-weight: bold;">{{ user.money }}</span></span>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <section class="services">
+                <h1>可用服务</h1>
+                {% for service in services %}
+                    <div class="service">
+                        <div class="service-content">
+                            <h2>{{ service.service_name }}</h2>
+                            <p class="description">{{ service.service_desc }}</p>
+                            <p class="description">运营服务商: {{ service.service_count }}</p>
+                            <p class="cost">费用: ¥ {{ service.price }}</p>
+                        </div>
+                        <a href="/service/detail?type_no={{ service.type_no }}">
+                            <button class="subscribe-button">订阅</button>
+                        </a>
+                    </div>
+                {% endfor %}
+            </section>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,2 @@
+生成数据表模型
+sqlacodegen mysql+pymysql://manfish:"password"@127.0.0.1:3306/manfish_demo?charset=utf8 > mysql_model1.py

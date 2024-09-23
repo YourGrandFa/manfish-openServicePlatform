@@ -1,0 +1,6 @@
+# 生成mysql数据表模型
+python manage.py inspectdb > manfish_AI_Service/models/models.py
+
+# 迁移django-session和auth表 至 mysql
+python manage.py migrate sessions
+python manage.py migrate auth

@@ -1,0 +1,22 @@
+.logout-container {
+    text-align: right; /* 或其他你需要的对齐方式 */
+    margin: 20px;
+}
+
+.logout-button {
+    background: none; /* 去掉默认按钮背景 */
+    border: none; /* 去掉默认按钮边框 */
+    padding: 0; /* 去掉按钮内边距 */
+    cursor: pointer; /* 鼠标悬停时显示手型光标 */
+}
+
+.logout-icon {
+    width: 40px; /* 根据需要调整图片宽度 */
+    height: 40px; /* 根据需要调整图片高度 */
+    display: block; /* 使图片成为块级元素 */
+    transition: opacity 0.3s ease; /* 添加过渡效果 */
+}
+
+.logout-button:hover .logout-icon {
+    opacity: 0.8; /* 鼠标悬停时的透明度效果 */
+}

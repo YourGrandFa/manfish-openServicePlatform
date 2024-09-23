@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/logout_pic.css">
+    <title>Welcome Page</title>
+    <style>
+        body {
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .button_a {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        .button_a:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="logout-container">
+        <a href="/logout">
+            {% csrf_token %}
+            <button type="submit" class="logout-button">
+                <img src="/static/image/logout.png" alt="登出" class="logout-icon">
+            </button>
+        </a>
+    </div>
+
+    <h1>Welcome to manfish's Web!</h1>
+    <p style="color:red; font-size: 28px">Your id is [ {{ user }} ]</p>
+    <p>Click the button below to explore more.</p>
+    {% for page in pages %}
+        <a class="button_a" href="{{ page.dict_id }}">{{ page.dict_value }}</a>
+    {% endfor %}
+</body>
+</html>

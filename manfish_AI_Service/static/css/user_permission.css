@@ -1,0 +1,51 @@
+.info-section {
+    margin-bottom: 20px;
+}
+.info-section h2 {
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    color: #555;
+}
+.info-section p {
+    font-size: 1.1em;
+    margin: 5px 0;
+}
+.form-container {
+    margin-top: 20px;
+}
+.form-container h2 {
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    color: #555;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+.form-group button {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.form-group button:hover {
+    background-color: #0056b3;
+}

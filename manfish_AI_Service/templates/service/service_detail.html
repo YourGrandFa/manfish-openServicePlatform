@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>服务详情页面</title>
+    <link rel="stylesheet" href="/static/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/detail_css.css">
+    <link rel="stylesheet" href="/static/css/back_page.css">
+</head>
+<body>
+<!-- 返回链接，使用图片作为图标 -->
+    <a href="javascript:history.back()" class="back-link">
+        <img src="/static/image/back.png" alt="返回" />
+    </a>
+    <div class="container">
+        <h1>服务详情页面</h1>
+
+        <div class="service-info">
+            <h2>{{ service.service_name }}</h2>
+            <p>{{ service.service_desc }}</p>
+            <p>服务收费：¥ {{ service.price }} 元/次</p>
+        </div>
+
+        <div class="provider-list">
+            <h2>可选服务商</h2>
+                <div class="provider">
+                    <label for="provider-select">选择服务商:</label>
+                    <select id="provider-select">
+                        {% for server in servers %}
+                            <option title="完成单数量：{{ server.all_done }} | 完单率 {{ server.success_rate }} %" value="{{ server.user_id }}">{{ server.username }}(
+                                <span style="color: red;">完成单数量：{{ server.all_done }}</span> |
+                                <span style="color: yellow;">完单率{{ server.success_rate }} %</span>
+                            )</option>
+                        {% endfor %}
+                        <!-- 更多服务商... -->
+                    </select>
+                </div>
+        </div>
+
+        <div class="order-config">
+            <h2>订单配置参数</h2>
+            <label for="order-quantity">文字要求:</label>
+            <input id="desc_text" placeholder="尽量简短" />
+
+            <!-- 文件上传表单 -->
+            <label for="fileInput">选择文件 (最多10个，单个文件不超过10MB):</label>
+            <input type="file" id="fileInput" name="fileInput" multiple>
+            <input type="hidden" id="fileListInput" name="file_list" value="" hidden/>
+            <input type="submit" id="file_upload" name="file_upload" onclick="uploadFile()" value="上传文件">
+
+        </div>
+
+        <button class="submit-button" onclick="uploadOrder()">提交订单</button>
+    </div>
+</body>
+
+<script>
+    function uploadFile() {
+        const fileInput = document.getElementById("fileInput");
+        const files = fileInput.files;
+        var selectElement = document.getElementById("provider-select");
+
+        // 获取所选的 option
+        var selectedOption = selectElement.options[selectElement.selectedIndex];
+        
+        if (!selectedOption) {
+            alert('请选择执行者！');
+            return;
+        }
+
+
+        if (files.length === 0) {
+            alert('请先选择文件');
+            return;
+        }
+
+        // 创建 FormData 对象
+        const formData = new FormData();
+        for (let i = 0; i < files.length; i++) {
+            formData.append('files', files[i]);
+        }
+
+        fetch('/file/upload', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === true) {
+                document.getElementById('fileListInput').value = data.msg;
+                alert("文件上传成功");
+            } else {
+                alert("文件上传失败: " + data.msg);
+            }
+        })
+        .catch(error => {
+            console.error('文件上传失败:', error);
+            alert("文件上传失败，请重试");
+        });
+    }
+
+    function uploadOrder() {
+        var fileInput = document.getElementById("fileListInput").value;
+        var desc_text = document.getElementById("desc_text").value;
+        var selectElement = document.getElementById("provider-select");
+        var type_no = {{ type_no }};
+
+        // 获取所选的 option
+        var selectedOption = selectElement.options[selectElement.selectedIndex];
+        
+        if (!selectedOption) {
+            alert('请选择执行者！');
+            return;
+        }
+        
+        // 获取选中项的值和文本
+        var selectedValue = selectedOption.value; // 选项的值
+
+
+        if (fileInput.trim() === "" && desc_text.trim() === "") {
+            alert('文件或内容不可同时为空项，请填入您的要求！');
+            return;
+        }
+
+        var jsonData = JSON.stringify({
+            "file_str": fileInput,
+            "desc_text": desc_text,
+            "performer": selectedValue,
+            "type_no": type_no,
+        });
+
+        fetch('', {
+            method: 'POST',
+            headers: {
+                    'Content-Type': 'application/json',
+                },
+            body: jsonData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === true) {
+                alert("订单提交成功");
+                window.location.href = '/order/detail?order_id=' + data.msg;
+            } else {
+                alert("订单提交失败: " + data.msg);
+            }
+        })
+        .catch(error => {
+            console.error('订单提交失败:', error);
+            alert("订单提交失败，请重试");
+        });
+    }
+</script>
+
+</html>

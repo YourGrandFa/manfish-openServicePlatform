@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>服务订阅页面</title>
+    <link rel="stylesheet" href="/static/css/list_css.css">
+    <link rel="stylesheet" href="/static/css/back_page.css">
+</head>
+<body>
+    <!-- 返回链接，使用图片作为图标 -->
+    <a href="javascript:history.back()" class="back-link">
+        <img src="/static/image/back.png" alt="返回" />
+    </a>
+    <header>
+        <div class="container">
+            <div class="user-info">
+                <span id="username">用户名: {{ user.username }}</span>
+                <span id="balance">账户余额: ¥ <span style="color: goldenrod;font-weight: bold;">{{ user.money }}</span></span>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <section class="services">
+                <h1>订单列表</h1>
+                {% for order in page_obj %}
+                    <div class="service">
+                        <div class="service-content">
+                            <h2>{{ order.service_name }}</h2>
+                            {% if state == "执行完成" %}
+                                <p class="description">{{ order.apply_time }} - {{ order.finish_time }} </p>
+                                <p class="description" style="color: green">{{ order.state }}</p>
+                            {% else %}
+                                <p class="description">{{ order.apply_time }}</p>
+                                <p class="description" style="color: yellowgreen">{{ order.state }}</p>
+                            {% endif %}
+                            <p class="description">运营服务商: {{ order.performer }}</p>
+                            <p class="cost">费用: ¥ {{ order.spend_money }}</p>
+                        </div>
+                        <a href="/order/detail?order_id={{ order.order_id }}">
+                            <button class="subscribe-button">查看详情</button>
+                        </a>
+                    </div>
+                {% endfor %}
+
+                <div class="pagination">
+                    <span class="step-links">
+                        {% if page_obj.has_previous %}
+                            <a href="?page=1">&laquo; 第一页</a>
+                            <a href="?page={{ page_obj.previous_page_number }}">上一页</a>
+                        {% endif %}
+
+                        <span class="current">
+                            第 {{ page_obj.number }} 页 共 {{ page_obj.paginator.num_pages }} 页
+                        </span>
+
+                        {% if page_obj.has_next %}
+                            <a href="?page={{ page_obj.next_page_number }}">下一页</a>
+                            <a href="?page={{ page_obj.paginator.num_pages }}">最后一页 &raquo;</a>
+                        {% endif %}
+                    </span>
+                </div>
+            </section>
+        </div>
+    </main>
+</body>
+</html>

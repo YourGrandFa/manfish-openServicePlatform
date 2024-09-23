@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/user_permission.css">
+    <link rel="stylesheet" href="/static/css/back_page.css">
+    <title>用户授权</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            width: 80%;
+            max-width: 800px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+<!-- 返回链接，使用图片作为图标 -->
+    <a href="javascript:history.back()" class="back-link">
+        <img src="/static/image/back.png" alt="返回" />
+    </a>
+    <div class="container">
+        <h1>授权详情</h1>
+
+        <!-- 用户信息部分 -->
+        <div class="info-section">
+            <h2>用户名</h2>
+            <p>{{ user.username }}</p>
+        </div>
+
+        <div class="info-section">
+            <h2>用户状态</h2>
+            <p>{{ user.user_state }}</p>
+        </div>
+
+        <div class="info-section">
+            <h2>账户状态</h2>
+            <p>{{ user.account_state }}</p>
+        </div>
+
+        <div class="info-section">
+            <h2>钱包余额</h2>
+            <p style="color: goldenrod">¥ {{ user.account_money }}</p>
+        </div>
+
+        <div class="info-section">
+            <h2>冻结金额</h2>
+            <p style="color: red">¥ {{ user.lock_money }}</p>
+        </div>
+
+        <!-- 授权码提交表单 -->
+        <div class="form-container">
+            <h2>提交授权码</h2>
+            <input name="account_id" id="account_id" value="{{ user.account_id }}" hidden/>
+            <div class="form-group">
+                <label for="auth-code">授权码</label>
+                <input type="text" id="license_code" name="license_code" required>
+            </div>
+            <div class="form-group">
+                <button onclick="upMsg()">提交</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<script>
+    function upMsg() {
+        var license_code = document.getElementById("license_code").value;
+        var account_id = document.getElementById("account_id").value;
+
+        if (license_code === "") {
+            alert("请填写完整内容");
+            return false; // 阻止表单提交
+        }
+
+        var jsonData = JSON.stringify({
+            "license_code": license_code,
+            "account_id": account_id,
+        });
+
+        fetch('', {
+            method: 'POST',
+            headers: {
+                    'Content-Type': 'application/json',
+                },
+            body: jsonData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === true) {
+                alert("已充值")
+                window.location.reload()
+            } else {
+                alert("提交失败: " + data.msg);
+            }
+        })
+        .catch(error => {
+            console.error('提交失败:', error);
+            alert("提交失败: " + error);
+        });
+    }
+</script>
+</html>

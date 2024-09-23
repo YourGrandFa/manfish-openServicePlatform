@@ -1,0 +1,79 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+.container {
+    width: 80%;
+    margin: 20px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+.service-info, .provider-list, .order-config {
+    margin-bottom: 20px;
+}
+.service-info {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+.provider-list {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+.provider {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+}
+.provider h3 {
+    margin: 0;
+    color: #444;
+}
+.provider p {
+    margin: 5px 0;
+    color: #666;
+}
+.order-config label {
+    display: block;
+    margin: 10px 0 5px;
+    color: #333;
+}
+.order-config input, .order-config select, .order-config textarea {
+    width: calc(100% - 22px);
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+.submit-button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+}
+.submit-button:hover {
+    background-color: #45a049;
+}
+.provider select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}

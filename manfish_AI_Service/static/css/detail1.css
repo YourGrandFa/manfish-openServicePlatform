@@ -1,0 +1,60 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+}
+.container {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+}
+.order-info, .attachments {
+    margin-bottom: 20px;
+}
+.order-info h2, .attachments h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    border-bottom: 2px solid yellowgreen;
+    padding-bottom: 5px;
+    color: yellowgreen;
+}
+.order-info p {
+    margin: 10px 0;
+    font-size: 1.1em;
+}
+.attachments ul {
+    list-style-type: none;
+    padding: 0;
+}
+.attachments li {
+    margin-bottom: 10px;
+}
+.attachments a {
+    color: deepskyblue;
+    text-decoration: none;
+    font-size: 1.1em;
+    display: flex;
+    align-items: center;
+}
+.attachments a:hover {
+    text-decoration: underline;
+}
+.attachments a .fa {
+    margin-right: 10px;
+}
+.no-attachments {
+    font-size: 1.1em;
+    color: #777;
+    text-align: center;
+}

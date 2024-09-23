@@ -1,0 +1,22 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.back-link {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: inline-block; /* 保证图片有块级特性 */
+    width: 40px; /* 设置图标宽度 */
+    height: 40px; /* 设置图标高度 */
+}
+
+.back-link img {
+    width: 100%; /* 让图片填满链接的盒子 */
+    height: auto; /* 保持图片纵横比 */
+}
+
+.content {
+    padding: 20px;
+}
