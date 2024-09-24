@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-# manfish-openServicePlatform
-This is a local service open platform based on the FastAPI+Django framework (pure Python framework), which includes two servers and two clients. It mainly serves platform service providers, opening up local computing resources (such as AI or io computing services) to customers in the form of order responses and obtaining virtual revenue from it.
-=======
 首先，这个系统依赖阿里云的oss存储服务，如果你不了解它，或许你需要前往它的官网
 https://www.aliyun.com/product/oss
 
@@ -42,4 +38,3 @@ SD图片生成 -> 生成后的图片未经审查，暂不提供
 语音克隆 -> 需要上传一份音频格式的原始语音、并在文字部分填报：原始语音中文内容|期望生成语音中文内容
 
 严重声明：本项目仅限个人学习目的，严禁商业目的。且该系统包含未经审查代码，如需参考，请详细梳理后使用，后果自负。
->>>>>>> a8b7a38 (the develope version of first.)
